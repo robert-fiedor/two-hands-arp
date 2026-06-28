@@ -1,8 +1,17 @@
 # Two Hands ARP
 
-Two Hands ARP is a public static web app project for a two-hand arpeggio tool.
+Two Hands ARP is a public static web app project for a two-hand intervallic lines trainer.
 
-The current version is a PRD-ready preview. The product requirements document will define the next implementation pass.
+The current version follows the Two-Hand Intervallic Lines Trainer PRD:
+
+- Built-in presets for the 1+1 arpeggio, intervallic transposition connector, two-by-three cluster, and F Dorian min9 walk.
+- Degree-based left/right hand shape editor.
+- Active event strip and keyboard display.
+- Playback, loop, fragment loop, tempo, ramp, step mode, and hand isolation.
+- Core transforms for all keys, connected interval copies, and diatonic shape-walking.
+- Local browser storage for saved shapes.
+
+Playback uses Tone.js with the Salamander piano samples, matching the existing music apps.
 
 ## Local Preview
 

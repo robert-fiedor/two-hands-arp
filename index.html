@@ -3,57 +3,182 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Two Hands ARP is a focused web app project for two-hand arpeggio work.">
+    <meta name="description" content="Two Hands ARP is a two-hand intervallic lines trainer for arpeggio, transposition, two-by-three, and diatonic shape-walking practice.">
     <title>Two Hands ARP</title>
-    <link rel="stylesheet" href="styles.css?v=20260627175000">
+    <link rel="stylesheet" href="styles.css?v=20260627223500">
   </head>
   <body>
     <main class="app-shell">
-      <section class="hero" aria-labelledby="app-title">
-        <div class="hero-copy">
-          <p class="eyebrow">Public preview</p>
-          <h1 id="app-title">Two Hands ARP</h1>
-          <p class="lede">
-            A clean starting point for a two-hand arpeggio tool. The first PRD pass will define the workflows, controls, and musical model.
-          </p>
+      <header class="topbar">
+        <div class="brand">
+          <h1>Two Hands ARP</h1>
+          <p id="lineSummary">Two-hand intervallic lines trainer</p>
         </div>
-        <div class="arp-board" aria-label="Arpeggio preview">
-          <div class="status-row">
-            <span>Pattern</span>
-            <strong id="patternLabel">Up</strong>
-          </div>
-          <div class="note-lane" id="noteLane" aria-live="polite"></div>
-          <div class="keyboard" aria-hidden="true">
-            <span class="white"></span>
-            <span class="black"></span>
-            <span class="white"></span>
-            <span class="black"></span>
-            <span class="white"></span>
-            <span class="white"></span>
-            <span class="black"></span>
-            <span class="white"></span>
-            <span class="black"></span>
-            <span class="white"></span>
-            <span class="black"></span>
-            <span class="white"></span>
-          </div>
+        <div class="top-controls">
+          <select id="presetSelect" aria-label="Preset"></select>
+          <select id="techniqueSelect" aria-label="Technique"></select>
         </div>
+      </header>
+
+      <section class="transport" aria-label="Transport">
+        <button class="command primary" id="playButton" type="button">Play</button>
+        <button class="command" id="stopButton" type="button">Stop</button>
+        <button class="command" id="stepButton" type="button">Step</button>
+        <label class="field compact">
+          <span>BPM</span>
+          <input id="tempoInput" type="number" min="40" max="240" step="1" value="84">
+        </label>
+        <input id="tempoRange" class="tempo-range" type="range" min="40" max="240" step="1" value="84" aria-label="Tempo">
+        <label class="check">
+          <input id="loopToggle" type="checkbox" checked>
+          <span>Loop</span>
+        </label>
+        <label class="check">
+          <input id="rampToggle" type="checkbox">
+          <span>Ramp</span>
+        </label>
       </section>
 
-      <section class="workbench" aria-labelledby="workbench-title">
-        <div>
-          <h2 id="workbench-title">PRD Intake Ready</h2>
-          <p>
-            This repo is live and structured for the product requirements you send next.
-          </p>
-        </div>
-        <div class="controls" role="group" aria-label="Preview pattern">
-          <button class="icon-button active" type="button" data-pattern="Up" aria-pressed="true">Up</button>
-          <button class="icon-button" type="button" data-pattern="Down" aria-pressed="false">Down</button>
-          <button class="icon-button" type="button" data-pattern="Split" aria-pressed="false">Split</button>
-        </div>
+      <section class="practice-grid">
+        <section class="panel line-panel" aria-labelledby="lineTitle">
+          <div class="panel-head">
+            <div>
+              <h2 id="lineTitle">Active Line</h2>
+              <p id="shapeLabel">Degree-based shape</p>
+            </div>
+            <div class="hand-toggle" role="group" aria-label="Hand playback">
+              <button type="button" data-hand="left">Left</button>
+              <button type="button" data-hand="both" class="is-active">Both</button>
+              <button type="button" data-hand="right">Right</button>
+            </div>
+          </div>
+          <div class="keyboard-wrap" id="keyboard"></div>
+          <div class="event-strip" id="eventStrip" aria-live="polite"></div>
+        </section>
+
+        <aside class="panel control-panel" aria-labelledby="practiceTitle">
+          <h2 id="practiceTitle">Practice</h2>
+          <div class="form-grid two">
+            <label class="field">
+              <span>Loop start</span>
+              <select id="loopStart"></select>
+            </label>
+            <label class="field">
+              <span>Loop end</span>
+              <select id="loopEnd"></select>
+            </label>
+            <label class="field">
+              <span>Ramp step</span>
+              <input id="rampStep" type="number" min="1" max="20" value="2">
+            </label>
+            <label class="field">
+              <span>Ramp ceiling</span>
+              <input id="rampCeiling" type="number" min="40" max="260" value="132">
+            </label>
+          </div>
+
+          <h2>Transform</h2>
+          <div class="form-grid two">
+            <label class="field">
+              <span>Root</span>
+              <select id="rootSelect"></select>
+            </label>
+            <label class="field">
+              <span>Quality</span>
+              <select id="qualitySelect">
+                <option value="major">Major</option>
+                <option value="minor">Minor</option>
+                <option value="dominant">Dominant</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Order</span>
+              <select id="orderSelect">
+                <option value="asc-desc">Asc then desc</option>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Interval</span>
+              <select id="intervalSelect">
+                <option value="1">Half step</option>
+                <option value="2">Whole step</option>
+                <option value="3">Minor third</option>
+                <option value="4">Major third</option>
+                <option value="5">Fourth</option>
+                <option value="7">Fifth</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Copies</span>
+              <input id="copyCount" type="number" min="2" max="12" value="4">
+            </label>
+            <label class="field">
+              <span>Walk steps</span>
+              <input id="walkPattern" type="text" value="+1" aria-label="Diatonic walk pattern">
+            </label>
+          </div>
+          <div class="button-row">
+            <button class="command" id="allKeysButton" type="button">All keys</button>
+            <button class="command" id="connectButton" type="button">Connect</button>
+            <button class="command" id="walkButton" type="button">Diatonic walk</button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="lower-grid">
+        <section class="panel" aria-labelledby="editorTitle">
+          <h2 id="editorTitle">Shape Editor</h2>
+          <div class="form-grid two">
+            <label class="field">
+              <span>Left hand degrees</span>
+              <input id="leftDegrees" type="text" spellcheck="false">
+            </label>
+            <label class="field">
+              <span>Right hand degrees</span>
+              <input id="rightDegrees" type="text" spellcheck="false">
+            </label>
+            <label class="field">
+              <span>Save as</span>
+              <input id="saveName" type="text" placeholder="My shape">
+            </label>
+            <div class="button-row align-end">
+              <button class="command" id="applyShapeButton" type="button">Apply shape</button>
+              <button class="command" id="saveButton" type="button">Save</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="theoryTitle">
+          <h2 id="theoryTitle">Theory</h2>
+          <div class="theory-grid">
+            <div>
+              <span>Active event</span>
+              <strong id="activeEventLabel">Ready</strong>
+            </div>
+            <div>
+              <span>Melodic interval</span>
+              <strong id="melodicInterval">-</strong>
+            </div>
+            <div>
+              <span>Harmonic interval</span>
+              <strong id="harmonicInterval">-</strong>
+            </div>
+            <div>
+              <span>Parent scale</span>
+              <strong id="parentScale">-</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel library-panel" aria-labelledby="libraryTitle">
+          <h2 id="libraryTitle">Library</h2>
+          <div class="saved-list" id="savedList"></div>
+        </section>
       </section>
     </main>
-    <script src="script.js?v=20260627175000"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.js"></script>
+    <script src="script.js?v=20260627223500"></script>
   </body>
 </html>
