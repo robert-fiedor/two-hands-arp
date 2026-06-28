@@ -1,0 +1,241 @@
+:root {
+  color-scheme: light;
+  --ink: #15191d;
+  --muted: #626b73;
+  --paper: #f7f5ef;
+  --panel: #ffffff;
+  --line: #d7d3c8;
+  --accent: #0f7c80;
+  --accent-strong: #0a5558;
+  --warm: #d86831;
+  --key: #fdfbf5;
+  --black-key: #20262a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    linear-gradient(135deg, rgba(15, 124, 128, 0.12), transparent 42%),
+    linear-gradient(315deg, rgba(216, 104, 49, 0.14), transparent 38%),
+    var(--paper);
+  color: var(--ink);
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.hero {
+  min-height: calc(100vh - 132px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  align-items: center;
+  gap: 48px;
+  padding: 32px 0 48px;
+}
+
+.hero-copy {
+  max-width: 660px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: clamp(3.25rem, 12vw, 8.6rem);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+h2 {
+  margin-bottom: 8px;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: 0;
+}
+
+.lede {
+  margin-bottom: 0;
+  max-width: 580px;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.arp-board {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 70px rgba(26, 30, 32, 0.14);
+  padding: 24px;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.status-row strong {
+  color: var(--ink);
+}
+
+.note-lane {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 10px;
+  min-height: 112px;
+  align-items: end;
+  margin: 28px 0;
+}
+
+.note {
+  min-width: 0;
+  height: calc(44px + var(--lift) * 12px);
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.08);
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.note.hot {
+  background: var(--warm);
+  transform: translateY(-8px);
+}
+
+.keyboard {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  height: 156px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--key);
+}
+
+.keyboard span {
+  border-right: 1px solid var(--line);
+}
+
+.keyboard span:last-child {
+  border-right: 0;
+}
+
+.keyboard .black {
+  position: relative;
+  z-index: 2;
+  width: 58%;
+  height: 62%;
+  margin-left: -29%;
+  border: 0;
+  border-radius: 0 0 6px 6px;
+  background: var(--black-key);
+}
+
+.workbench {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 0 8px;
+  border-top: 1px solid rgba(21, 25, 29, 0.16);
+}
+
+.workbench p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.icon-button {
+  min-width: 82px;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.icon-button:hover,
+.icon-button:focus-visible {
+  border-color: var(--accent);
+  outline: 2px solid rgba(15, 124, 128, 0.24);
+  outline-offset: 2px;
+}
+
+.icon-button.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    width: min(100% - 24px, 560px);
+    padding: 18px 0;
+  }
+
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 32px 0;
+  }
+
+  .arp-board {
+    padding: 16px;
+  }
+
+  .workbench {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .controls {
+    justify-content: stretch;
+  }
+
+  .icon-button {
+    flex: 1 1 88px;
+  }
+}

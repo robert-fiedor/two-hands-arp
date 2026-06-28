@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Two Hands ARP is a focused web app project for two-hand arpeggio work.">
+    <title>Two Hands ARP</title>
+    <link rel="stylesheet" href="styles.css?v=20260627175000">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="app-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Public preview</p>
+          <h1 id="app-title">Two Hands ARP</h1>
+          <p class="lede">
+            A clean starting point for a two-hand arpeggio tool. The first PRD pass will define the workflows, controls, and musical model.
+          </p>
+        </div>
+        <div class="arp-board" aria-label="Arpeggio preview">
+          <div class="status-row">
+            <span>Pattern</span>
+            <strong id="patternLabel">Up</strong>
+          </div>
+          <div class="note-lane" id="noteLane" aria-live="polite"></div>
+          <div class="keyboard" aria-hidden="true">
+            <span class="white"></span>
+            <span class="black"></span>
+            <span class="white"></span>
+            <span class="black"></span>
+            <span class="white"></span>
+            <span class="white"></span>
+            <span class="black"></span>
+            <span class="white"></span>
+            <span class="black"></span>
+            <span class="white"></span>
+            <span class="black"></span>
+            <span class="white"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workbench" aria-labelledby="workbench-title">
+        <div>
+          <h2 id="workbench-title">PRD Intake Ready</h2>
+          <p>
+            This repo is live and structured for the product requirements you send next.
+          </p>
+        </div>
+        <div class="controls" role="group" aria-label="Preview pattern">
+          <button class="icon-button active" type="button" data-pattern="Up" aria-pressed="true">Up</button>
+          <button class="icon-button" type="button" data-pattern="Down" aria-pressed="false">Down</button>
+          <button class="icon-button" type="button" data-pattern="Split" aria-pressed="false">Split</button>
+        </div>
+      </section>
+    </main>
+    <script src="script.js?v=20260627175000"></script>
+  </body>
+</html>
